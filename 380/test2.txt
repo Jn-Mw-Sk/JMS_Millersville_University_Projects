@@ -1,0 +1,65 @@
+Explain how the author of a shell program can use process groups and what benefit they will provide.
+Whenever the shell starts a new job, it should put all processes that are part of that job in the same new process group.  It will then be able to easily send signals (such as SIGINT, SIGTSTP, and SIGCONT) to all processes that are part of the job.
+
+Which of the following is *not* a benefit of virtual memory?
+Faster memory reads
+
+What is true about the relationship between virtual pages and physical frames?
+Any virtual page can be resident in any physical frame.
+
+What does a "page fault" actually mean (in general, not just one specific case)?
+An attempt to access a memory location that is not inside a resident page with the right permissions.
+
+Describe the concept of the "principle of locality" *and* explain how it makes paging systems work efficiently.
+The principle of locality states that the addresses I will be reading from / writing to in the near future are highly likely to be close by the ones that I read from / wrote to in the recent past.
+This makes paging systems work well because addresses that are nearby each other are going to be *in the same page*, and thus when that page gets swapped in for its first use it will already be resident for future uses.
+
+Which of the following is *not* a reason why two processes might share pages?
+One process is using the top half of the page; the other process the bottom half.
+
+Which of the following is *not* a benefit you get from a multi-level page table over a single-level page table?
+The most frequently-used translations can be performed using only the first-level table.
+
+Why / how is it possible to store a size and other information such as whether a block is allocated or free in a single memory word?
+The key to this is that due to alignment requirements, some low-order bits of the size will be 0 for any legal size.  
+Thus, other information can be stored overtop of those always-zero bits.  When reading the other information, we will look only at the bits that are used for it.  
+When reading the size, we will pretend those bits are 0 even if that's not what is actually stored there.
+
+Explain how a garbage collector could make a conservative guess as to whether or not a location in memory contains a pointer to a heap location.  
+(Conservative means that it will never say something that really is a pointer is not.)
+Interpret the contents of that memory location as an unsigned integer.  If its value is between the address where the heap begins and the address where the heap ends, then it should be considered a potential pointer.
+
+What benefit does the best-fit algorithm have over the first-fit algorithm for choosing a free block in an implicit block list?
+It produces less external fragmentation.
+
+Which of the following are true about the printf function?  Check all that are true.
+On Linux, its implementation uses the write system call.
+It puts data into a buffer, which then gets written to an ultimate location when one of several triggers 
+(such as the fflush function or processing a newline character) occurs.
+
+What is wrong with this code?  Check all that apply.
+
+#include <string.h>
+#include <stdbool.h>
+char* getUniversityName(bool formal) {
+    char s[24];
+    if (formal) {
+        strcpy (s, "Millersville University Of Pennsylvania");
+    }
+    else {
+        strcpy (s, "Millersville University");
+    }
+    return s;
+}
+
+It will overflow a buffer, writing data to locations that were set aside for other purposes.
+
+It returns a pointer to a location that will no longer be valid when the function exits.
+
+
+int fd = open ("data.dat", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+void* p = mmap (NULL, sizeof (struct foo), PROT_WRITE, MAP_SHARED, fd, 0);
+((struct foo *)p)->bar = 7;
+munmap (p, sizeof (struct foo));
+close (fd);
+

@@ -1,0 +1,132 @@
+/**
+ * This program takes input from the user for a fence post character,
+ * vertical wire character, horizontal wire character, 
+ * width of the fence, and height of the fence. The program then constructs 
+ * a "fence" with the specifications.
+ * 
+ * @author John Shenk
+ * 
+ * <Date> March 10, 2020
+ *
+ */
+import java.util.Scanner;
+public class Lab5 {
+
+	
+	/**
+	 * Prompts for a character entry given the prompt string
+	 * provided then returns single character entered by the
+	 * user via the console object.
+	 * @param console
+	 * @param prompt
+	 * @return
+	 */
+	public static char getChar(Scanner console, String prompt) {
+		System.out.printf(prompt);
+		String input = console.nextLine();
+		int stringLength = input.length();
+		while(stringLength <= 0) {
+			System.out.printf(prompt);
+			input = console.nextLine();
+			stringLength = input.length();
+		}
+		return input.charAt(0);
+	}
+	
+	/**
+	 * Prompts for a positive integer entry given the prompt string
+	 * provided then returns the positive integer entered by the
+	 * user via the console object.
+	 * @param console
+	 * @param prompt
+	 * @return
+	 */
+	public static int getInt(Scanner console, String prompt) {
+		System.out.printf(prompt);
+		int num = console.nextInt();
+		while(num <= 0) {
+			System.out.printf("\nNumber entered is less than or equal to zero.\n");
+			System.out.printf("Please enter a number greater than 0.\n");
+			System.out.printf(prompt);
+			num = console.nextInt();
+		}
+		return num;
+	}
+	/**
+	 * Given the post and horizontal wire characters, this 
+	 * method uses a for loop to print out the horizontal
+	 * section of the fence given its width. Call this once for
+	 * the top of the fence, and a 2nd time for the bottom of the
+	 * fence.
+	 * @param post
+	 * @param hWire
+	 * @param width
+	 */
+	
+	public static void printHorizontal(char post, char hWire, int width) {
+		System.out.print(post);
+		for(int x = 1; x <= width; x++) {
+			System.out.print(hWire);
+			System.out.print(post);
+		}
+		System.out.print("\n");
+	}
+	
+	/**
+	 * Given the post and vertical wire characters, this method
+	 * uses 2 nested for loops to print out the vertical
+	 * sections of the fence. Each vertical section includes the
+	 * the left and right sides which must alternate between vertical
+	 * wire characters and post characters along with spaces in
+	 * between for the appropriate width of the fenced area.
+	 * @param post
+	 * @param vWire
+	 * @param width
+	 * @param height
+	 */
+	
+	public static void printVerticals(char post, char vWire, int width, int height) {
+		for(int m = 1; m <= height; m++) {
+			// Print a vertical line with wire
+			System.out.print(vWire);
+			for(int n = 1; n <= width * 2 - 1; n++ ) {
+				System.out.print(" ");
+			}
+			System.out.print(vWire + "\n");
+			
+			// Print a vertical line with a post
+			if (m < height) {
+				System.out.print(post);
+				for(int j = 1; j <= width * 2 -1; j++) {
+					System.out.print(" ");
+				}
+				System.out.print(post + "\n");
+			}
+			
+		}
+	}
+	
+	/**
+	 * This method displays the "Output: " message.
+	 */
+	public static void printOutput(){
+		System.out.printf("\nOutput: \n");
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		Scanner console = new Scanner(System.in);
+		char fencePost = getChar(console, "Please enter a single character to represent a fence post: ");
+		char hWire = getChar(console, "Please enter a single character to represent the horizontal fence wire: ");
+		char vWire = getChar(console, "Please enter a single character to represent the vertical fence wire:  ");
+		int width = getInt(console, "Please enter the # of sections in the width of the fence:  ");
+		int height = getInt(console, "Please enter the # of sections in the height of the fence: ");
+		
+		printOutput();
+		printHorizontal(fencePost, hWire, width);
+		printVerticals(fencePost, vWire, width, height);
+		printHorizontal(fencePost, hWire, width);
+	}
+
+}

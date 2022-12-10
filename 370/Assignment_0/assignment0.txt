@@ -1,0 +1,80 @@
+/*
+ * Assignment 0 - Layers
+ * Author: John Shenk
+*/
+
+1. The name of the machine I am using is "knuth". I used the command 'hostname' to find this information
+
+2. The language Python is supported on this machine and the current version is 3.10.5. 
+   I used the command 'python --version'. Python does not convert its code to machine code, 
+   instead converting it into byte code. An interpreter called the python virtual machine 
+   executes the byte codes.
+   https://www.geeksforgeeks.org/internal-working-of-python/#:~:text=Python%20doesn't%20convert%20its,It%20is%20into%20byte%20code%20(.
+
+   The language Java is supported on this machine and the current version is 18.0.2. 
+   I used the command 'java --version'. To convert to machine code, a compiler is used to 
+   convert the source code into a machine language module. Then a linker steps in to combine 
+   the module with already compiled object files to make an executable.
+   http://www2.hawaii.edu/~takebaya/ics111/process_of_programming/process_of_programming.html 
+
+3. The machine I am using uses the GNU gcc assembler and the current version is 12.1.1. 
+   I used the command 'gcc --version'.
+
+   Example assembly code code: 
+
+   ; Subroutine Prologue
+   push ebp     ; Save the old base pointer value.
+   mov ebp, esp ; Set the new base pointer value.
+   sub esp, 4   ; Make room for one 4-byte local variable.
+   push edi     ; Save the values of registers that the function
+   push esi     ; will modify. This function uses EDI and ESI.
+   ; (no need to save EBX, EBP, or ESP)
+
+   ; Subroutine Body
+   mov eax, [ebp+8]   ; Move value of parameter 1 into EAX
+   mov esi, [ebp+12]  ; Move value of parameter 2 into ESI
+   mov edi, [ebp+16]  ; Move value of parameter 3 into EDI
+
+   mov [ebp-4], edi   ; Move EDI into the local variable
+   add [ebp-4], esi   ; Add ESI into the local variable
+   add eax, [ebp-4]   ; Add the contents of the local variable
+                     ; into EAX (final result)
+
+   ; Subroutine Epilogue 
+   pop esi      ; Recover register values
+   pop  edi
+   mov esp, ebp ; Deallocate local variables
+   pop ebp ; Restore the caller's base pointer value
+   ret
+
+   Source: https://www.cs.virginia.edu/~evans/cs216/guides/x86.html
+    
+4. The OS and distribution of the machine I am using is "Arch Linux". 
+   I used the command 'cat /etc/os-release'.
+   The Kernel version is 5.19.1-arch2-1. 
+   I used the command 'uname -r'
+
+5. The model name of the cpu on this machine is 11th Gen Intel(R) Core(TM) i7-11700 @ 2.50GHz.
+   I used the command 'lscpu'.
+   The processor uses a 64-bit instruction set.
+   The available instruction set extensions are: 
+    Intel® SSE4.1, Intel® SSE4.2, Intel® AVX2, Intel® AVX-512
+
+6. The processor on this machine uses a 16 MB Intel Smart Cache.
+   The Bus Speed on this processor is 8 GT/s.
+   Source: https://ark.intel.com/content/www/us/en/ark/products/212279/intel-core-i711700-processor-16m-cache-up-to-4-90-ghz.html
+   
+7. (A ^ B) V (~A ^ ~B)
+
+8. Photolithography is a process used in the production of thin films for applications such as
+   microelectronics, biosensors, and custom patterned electrodes. First, the surface substrate 
+   of the wafer is prepared before the photoresist is applied, which is the applied.
+   After a pre-bake process to remove residual photoresist solvent, the substrate and photomask are 
+   aligned with a UV light source for proper exposure. During this exposure phase, the pattern underneath the 
+   photomask, using advanced materials and technology to allow precise etching.
+   Finally, after a post-baking process to herden the developed photoresist material,
+   The exposed photoresist is removedm leaving behind the necessary patterned material.
+   Source: https://www.platypustech.com/an-overview-of-the-photolithography-process
+
+   For the processor model in this machine, the lithography (process node) used is 14 nm.
+   

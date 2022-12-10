@@ -1,0 +1,273 @@
+// File: munix.c
+// Author: Chad Hogg & Matt Shenk
+// Implementation of Munix file-related system calls.
+// Part of munix lab in CSCI380.
+
+#include <string.h>
+#include <assert.h>
+#include <stdio.h>
+
+#include "munix.h"
+#include "mufs.h"
+#include "muusers.h"
+#include "muerrno.h"
+
+
+//// Types that are only relevant to this file //////////
+
+
+// All the information about a file that a process has open.
+// In real UNIX that would be split across three different structures.
+struct openFile
+{
+    // The inode of the file.
+    struct iNode inode;
+    // The block (if any) that is currently buffered.
+    char currentData[BLOCK_SIZE];
+    // The index (into the inode's direct blocks array) of which block is currently
+    //   buffered, or -1 if none are buffered.
+    uint32_t currentBlockIndex;
+    // The location in the file where the next byte would be read / written.
+    uint32_t filePointer;
+    // The flags used when this file was opened.
+    int flags;
+    // Whether or not the buffered block (if any) has been modified.
+    int dirty;
+    // The number of this file's inode, or -1 to indicate no open file.
+    int iNodeNumber;
+};
+
+
+//// Constants that are only relevant to this file /////////////
+
+
+#define FILE_TABLE_SIZE 10
+
+
+//// Global variables //////////////////////////////////////////
+
+
+// The table of files that the process has open.
+// Indexes into this array are used as file descriptors.
+struct openFile files[FILE_TABLE_SIZE];
+
+// The user number of the currently-logged in user.
+int activeUserNumber;
+
+// The group number of the currently-logged in group.
+int activeGroupNumber;
+
+// The inode of the processe's current working directory.
+struct iNode workingDirINode;
+
+
+//// Helper functions //////////////////////////////////////////
+
+
+// Finds a file in a directory.
+// Params:
+//   name - The name of the file we are searching for.
+//   dirNode - The inode of the directory in which we are searching.
+// Returns:
+//   The inode number of the file, or -1 if the file does not exist.
+int
+findFile (const char* name, const struct iNode* dirNode)
+{
+    //TODO
+    
+    return -1;
+}
+
+// Determines whether or not the process can read a file.
+// Params:
+//   node The inode of the file.
+// Returns:
+//   1 if the process has read permission, 0 otherwise.
+int
+canRead (const struct iNode* node)
+{
+    if(node->mode == MU_O_RDONLY || node->mode == MU_O_RDWR)
+        return 1;
+
+    return 0;
+}
+
+// Determines whether or not the process can write a file.
+// Params:
+//   node The inode of the file.
+// Returns:
+//   1 if the process has write permission, 0 otherwise.
+int
+canWrite (const struct iNode* node)
+{
+    if(node->mode == MU_O_WRONLY || node->mode == MU_O_RDWR)
+        return 1;
+
+    return 0;
+}
+
+// Determines whether or not the process can execute a file.
+// Params:
+//   node The inode of the file.
+// Returns:
+//   1 if the process has execute permission, 0 otherwise.
+int canExecute (const struct iNode* node)
+{
+    
+
+    return 0;
+}
+
+// Searches for a free block, marking it as used.
+// Returns:
+//   The number of the previously-free block if one is found, or -1 if none are found.
+int
+findAndMarkFreeBlock ()
+{
+    // TODO
+    return -1;
+}
+
+//// Library functions /////////////////////////////////////////
+
+int
+muinit (const char* userName, const char* groupName)
+{
+    // TODO
+
+    // Look up user and group numbers, check for existence and membership.
+    if(lookUpUserNumber(userName) == -1){
+        muerrno = MU_E_NO_SUCH_USER;
+        return -1;
+    }
+    if(lookUpGroupName(groupName) == -1){
+        muerrno = MU_E_NO_SUCH_GROUP;
+        return -1;
+    }
+    if(isUserInGroup())
+    // Set user and group number.
+
+    // Set each file table entry to be for inode number -1.
+
+   
+    return 0;
+}
+
+int
+mucd (const char* dirName)
+{
+    // TODO
+
+    // Check for valid directory name.
+
+    // Find iNode associated with name / check that it exists.
+
+    // Read inode associated with directory.
+
+    // Check that file type is directory.
+
+    // Check that directory can be executed.
+
+    // Overwrite working directory inode with this directory's inode.
+
+    return 0;
+}
+
+int
+muopen (const char* fileName, int flags)
+{
+    // TODO
+
+    // Find an unused location in the file descriptor table.
+
+    // Check for existence of unused location in file descriptor table.
+
+    // Check for valid file name.
+
+    // Find inode associated with name / check that it exists.
+
+    // Read file's inode.
+
+    // Check that file type is regular file.
+
+    // Check for read permission if we are requesting it.
+
+    // Check for write permission if we are requesting it.
+
+    // Copy iNode into chosen spot in file descriptor table, set it up for appropriate
+    //   permissions with no data block loaded and file pointer at 0.
+
+    return -1;
+}
+
+int
+muclose (int fd)
+{
+    // TODO
+
+    // Check for valid file descriptor.
+
+    // Write block to disk if dirty.
+
+    // Mark location's inode as available.
+
+    return 0;
+}
+
+int
+muread (int fd, char* buffer, int n)
+{
+    // TODO
+    // Check for valid file descriptor.
+
+    // Check that file is open for reading.
+
+    // Read until n bytes have been read or end of file reached.
+    while (0 /*something*/)
+    {
+        // If wrong block loaded, unload it and write if dirty.
+
+        // If no block loaded, load it.
+
+        // Copy one byte.
+
+    }
+
+    return -1;
+}
+
+int
+muwrite (int fd, const char* buffer, int n)
+{
+    // TODO
+
+    // Check for valid file descriptor.
+
+    // Check that file is open for writing.
+
+    // Write until n bytes have been written or file is maximum length.
+    while (0 /*something*/)
+    {
+        // If wrong block loaded, unload it and write if dirty.
+
+        // If no block loaded, load it.
+        if (0 /*something*/)
+        {
+            // If block does not yet exist, allocate one for it.
+
+            // Load the block
+        }
+        // Copy one byte, increasing size if necessary.
+
+    }
+    // Write inode in case file size / direct blocks changed.
+
+    return -1;
+}
+
+void
+muls ()
+{
+    // TODO
+
+}

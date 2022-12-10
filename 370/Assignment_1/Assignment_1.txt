@@ -1,0 +1,35 @@
+Assignment 1 - John Shenk
+M[A] = 100, M[B] = 200, M[B] = 300
+
+1. 
+
+Location   Contents           Comment             
+--------   --------           -------             
+0          1                  Constant        
+1          100                Constant         
+2          99                 J
+3L         LOAD M(199)        AC <-- A[J]        
+3R         ADD M(299)         AC <-- A[J] + B[J] 
+4L         STOR M(399)        Write C[J]       
+4R         LOAD M(2)          AC <-- J                
+5L         SUB M(0)           AC <-- J - 1    
+5R         JUMP+ (M(6,20:39)) Branch to 6R if AC >= 0 
+6L         HALT               Terminate program         
+6R         STOR M(2)          M[2] <-- AC
+7L         LOAD M(1)          AC <-- 100
+7R         ADD M(2)           AC <-- AC + J
+8L         STOR M(3,8:19)     M(3,8:19) <-- AC(28:39)
+8R         ADD M(1)           AC <-- AC + 100 
+9L         STOR M(3,28:39)    M(3,28:39) <-- AC(28:39) 
+9R         ADD M(1)           AC <-- AC + 100
+10L        STOR M(4,8:19)     M(4,8:19) <-- AC(28:39)
+10R        JUMP M(3,0:19)     Branch to 3L
+
+2. 
+ In order to read a value from memory, the value memory address in the MAR is 
+ transferred to the MBR. This read is used when we want to add something to the AC.
+
+ In order to write a value to memory, a value from the MBR is sent to an address within
+ the MAR. A write is used when a value needs to be kept for later use or an address has 
+ to be modified.
+

@@ -1,0 +1,226 @@
+Title  : Performance Assignment
+Class  : CSCI 370
+Name(s):  John Shenk
+
+⁹
+
+******************************************************************************
+
+Consider three different processors P1, P2, and P3 executing the same
+instruction set with the clock rates and CPIs given below.
+
+Processor    Clock Rate      CPI
+P1	     2.0 GHz           1.5
+P2	     1.5 GHz	     1.0
+P3	     3.0 GHz	     2.5
+
+1.1) Which processor has the highest performance in instructions per
+second?
+
+      P1: Is_1 = f_1 / CPI_1 = 2.0 GHz / 1.5 c/i = ## 1.33e9 Is ##
+
+      P2: Is_2 = f_2 / CPI_2 = 1.5 GHz / 1.0 c/i = ## 1.50e9 Is ##
+
+      P3: Is_3 = f_3 / CPI_3 = 3.0 GHz / 2.5 c/i = ## 1.20e9 Is ##
+
+      P2 is the fastest.
+
+1.2) If the processors each execute a program in 10 seconds, find the
+number of cycles and the number of instructions for each processor. 
+
+      P1:
+            CC_1 = IC_1 * CPI_1 = 1.33e9 i * 1.5 c/i = ## 2.0e10 c ##
+            IC_1 = CC_1 / CPI_1 = 2.0e10 c / 1.5 c/i = ## 1.33e10 i ##
+
+      P2: 
+            CC_2 = IC_2 * CPI_2 = 1.50e9 i * 1 c/i = ## 1.5e10 c ##
+            IC_2 = CC_2 / CPI_2 = 1.5e10 c / 1 c/i = ## 1.5e10 i ##
+
+      P1:  
+            CC_3 = IC_3 * CPI_3 = 1.2e9 i * 2.5 c/i = ## 3.0e10 c ##
+            IC_3 = CC_3 / CPI_3 = 3.0e10 c / 2.5 c/i = ## 1.2e10 i ##
+
+
+1.3) We are trying to reduce the time (from 10 s in Problem 1.2) by
+30% but this leads to an increase of 20% in the CPI. What clock rate
+should we have to get this time reduction for each processor?
+
+T1, T2, T3 = 10s - (10 * .3) = 7s
+
+P1:
+      CPI_1 = 1.2 * 1.5 c/i = 1.8 c/i
+      f_1 = (IC_1 * CPI_1) / T_1 = (1.33e10 i  * 1.8 c/i) / 7s 
+      = 0.342e10 c/s = ## 3.42 GHz ## 
+P2:
+      CPI_2 = 1.2 * 1.0 c/i = 1.2 c/i
+      f_2 = (IC_2 * CPI_2) / T_2 = (1.50e10 i * 1.2 c/i) / 7s
+      = 0.257e10 c/s = ## 2.57 GHz ##
+P3:
+      CPI_3 = 1.2 * 2.5 c/i = 3 c/I
+      f_3 = (IC_3 * CPI_3) / T_3 = (1.20e10 i * 3 c/i) / 7s
+      = 0.514e10 c/s = ## 5.14 GHz ## 
+      
+For the problems below, use the information in the following table.
+
+Processor    Clock Rate    No. Instructions    Time
+P1	     2.0 GHz	   20e9		       7  s
+P2	     1.5 GHz	   30e9		       10 s
+P3	     3.0 GHz	   90e9		       9  s
+
+1.4) Find the IPC for each processor.
+
+P1:
+      CC_1 = f_1 * T_1 = 2.0e9 c/s * 7 s = 14e9 CC
+      CPI_1 = CC_1 / IC_1 = 14e9 c / 20e9 i = 0.7 CPI
+      IPC_1 = 1 / CPI_1 = 1 / 0.7 CPI = ## 1.43 IPC ##
+
+P2:
+      CC_2 = f_2 * T_2 = 1.5e9 c/s * 10 s = 15e9 CC
+      CPI_2 = CC_2 / IC_2 = 15e9 c / 30e9 i = 0.5 CPI
+      IPC_2 = 1 / CPI_2 = 1 / 0.5 CPI = ## 2.0 IPC ##
+
+P3:
+      CC_3 = f_3 * T_3 = 3.0e9 c/s * 9 s = 27e9 CC
+      CPI_3 = CC_3 / IC_3 = 27e9 c / 90e9 i = 0.3 CPI
+      IPC_3 = 1 / CPI_3 = 1 / 0.3 CPI = ## 3.33 IPC ##
+
+
+1.5) Find the clock rate for P2 that reduces its execution time to
+that of P1.
+
+T_1 = CC_2 / f_2 
+7s = 15e9 c / f_2
+f_2 = 15e9 c / 7 s = 2.5e9 c/s = 2.14 GHz
+
+
+1.6) Find the number of instructions for P2 that reduces it execution
+time to that of P3.
+
+T_3 = (IC_2 * CPI_2) / f_2
+IC_2 = (T_3 * f_2) / CPI_2
+IC_2 = (9s * 1.5e9 c/s) / 0.5 c/i = ## 27e9 i ##
+
+
+******************************************************************************
+
+Consider two different implementations (P1 and P2) of the same
+ISA. There are four classes of instructions: A, B, C, and D. The clock
+rate and CPI of each implementation are given in the following table.
+
+      Clock Rate | CPI Class A | CPI Class B | CPI Class C | CPI Class D
+P1    1.5 GHz      1             2             3             4
+P2    2.0 GHz      2     	   2	           2 	       2
+
+2.1) Suppose we have a program with 10^6 instructions divided into
+classes as follows: 10% class A, 20% class B, 50% class C, and 20%
+class D. Which implementation is faster?
+
+P1: 
+CPI_1 = 1(0.1) + 2(0.2) + 3(0.5) + 4(0.2) = 2.8 c/i
+T = IC_1 * CPI_1 / f_1 = 10^6 i * 2.8 c/i / 1.5e9 c/s = # 1.87e-3 s ##
+
+P2:
+CPI_2 = 2(0.1) + 2(0.2) + 2(0.5) + 2(0.2) / 4 = 2 c/i 
+T = IC_1 * CPI_1 / f_1 = 10^6 i * 2 c/i / 2.0e9 c/s = # 1.0e-3 s ##
+
+Processor 2 is faster.
+
+2.2) What is the global CPI for each implementation?
+
+CPI_1 = (1 + 2 + 3 + 4) / 4 = ## 2.8 c/i ##
+CPI_2 = (2 + 2 + 2 + 2) / 4 = ## 2 c/i ##
+
+2.3) Find the clock cycles required in both cases.
+
+CC_1 = IC_1 * CPI_1 = 10^6 i * 2.8 c/i = ## 2.8e c ##
+CC_2 = IC_2 * CPI_2 = 10^6 i * 2.0 cli = ## 2.0e c ## 
+
+
+The following table shows the number of instructions for a program.
+
+Arith    Store    Load    Branch   Total
+500	   50	      100	  50	     700
+
+2.4) Assuming that Arith instructions take 1 cycle, Load and Store 5
+cyles, and Branch 2 cycles, what is the execution time of the program
+in a 2 GHz processor?
+
+CC = SUM(IC * CPI) = 500(1) + 50(5) + 100(5) + 50(2) = 1350 c
+T = CC / f = 1350 c / 2e9 c/s = ## 675e-9 s ##  
+
+
+2.5) Find the CPI for the program.
+
+CPI = CC / IC = 1350 c / 700 i = ## 1.93 c/i ##
+
+
+2.6) If the number of load instructions can be reduced by one-half,
+what is the speed-up and the CPI?
+
+ICnew = 650
+CCnew = SUM(IC * CPI) = 500(1) + 50(5) + 50(5) + 50(2) = 1100c
+Tnew = CCnew / f = 1100 c / 2e9 c/s = 550e-9 s
+
+speedup = Told / Tnew =  675e-9 s / 550 e-9 s = ## 1.23 ##
+CPInew = CCnew / ICnew = 1100 c / 650 i = ## 1.69 c/i ##
+
+
+
+******************************************************************************
+
+Suppose we have developed new versions of a processor with the
+following characteristics.
+
+Version    Voltage    Clock Rate
+V1	   5.0 V      0.5 GHz
+V2	   3.3 V      1.0 GHz
+
+3.1) Determine the ratio of capactive loads (L_2 / L_1) if the power
+has been reduced by 10%?
+
+0.9p1 = L1 * 5.0v^2 * 0.5 GHz
+
+0.9p2 = L2 * 3.3v^2 * 1.0 GHz
+
+L1 = 0.9p / (5.0v^2 * 0.5 GHz) = 0.072
+
+L2 = 0.9p / (3.3v^2 * 1.0 GHz) = 0.083
+
+L2 / L1 = 0.083/0.072 = ## 1.15 ##
+ 
+
+
+3.2) By what factor has the power been reduced if the capacitive load does
+not change? (Determine the ratio P_2 / P_1.)
+
+0.9P_1 = L_1 * 5v^2 * 0.5GHz = (5^2 * 0.5) / 0.9 = 13.89
+
+0.9P_2 = L_2 * 3.3v^2 * 1.0GHz = (3.3^2 * 1.0)/ 0.9 = 12.1
+
+P_2 / P_1 = ## 0.87 ##
+
+
+3.3) Assuming that the capacitive load of V2 is 80% the load of V1,
+find the voltage for V2 if the power of V2 is reduced by 40% from V1.
+
+L_2 = 0.8 * L1 = 0.0576
+P_2 = P_2 - (P_1 * 0.4) = 0.54
+V_2^2 = P / L_2 * F_2 = 0.54 / 0.0576 * 1GHZ = sqrt(9.375) = ## 3.06V ##
+
+
+Supposing the industry trends show that a new process generation
+scales as below.
+
+Capacitive Load    Voltage    Clock Rate    Area
+1	   	   2^(1/4)    2^(1/2)	    2^(-1/2)
+
+3.4) By what factor does the power scale?
+
+P = 1 * 2^(1/4)V^2 * 2^(1/2)f * 2^(-1/2)
+P = 1 * 2^(1/4)(V * 1^(1/4)f * 1^(-1/2)a)
+P = 2^1/4(v * f * a)
+
+## P scales by a factor of 2. ##
+
+
+******************************************************************************
