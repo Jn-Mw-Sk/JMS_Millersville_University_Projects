@@ -1,0 +1,4 @@
+0(9) : error C7529: OpenGL does not allow #include directives
+0(10) : error C0109: Can't open include file "iostream"
+0(140) : error C0000: syntax error, unexpected identifier, expecting template identifier or type identifier at token "cout"
+

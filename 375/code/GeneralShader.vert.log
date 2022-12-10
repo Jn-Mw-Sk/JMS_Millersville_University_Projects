@@ -1,0 +1,27 @@
+0:92(2): error: `vColor' undeclared
+0:92(2): error: value of type vec3 cannot be assigned to variable of type error
+0:96(2): error: `vColor' undeclared
+0:96(18): error: `vColor' undeclared
+0:96(11): error: no matching function for call to `clamp(error, float, float)'; candidates are:
+0:96(11): error:    float clamp(float, float, float)
+0:96(11): error:    vec2 clamp(vec2, float, float)
+0:96(11): error:    vec3 clamp(vec3, float, float)
+0:96(11): error:    vec4 clamp(vec4, float, float)
+0:96(11): error:    vec2 clamp(vec2, vec2, vec2)
+0:96(11): error:    vec3 clamp(vec3, vec3, vec3)
+0:96(11): error:    vec4 clamp(vec4, vec4, vec4)
+0:96(11): error:    int clamp(int, int, int)
+0:96(11): error:    ivec2 clamp(ivec2, int, int)
+0:96(11): error:    ivec3 clamp(ivec3, int, int)
+0:96(11): error:    ivec4 clamp(ivec4, int, int)
+0:96(11): error:    ivec2 clamp(ivec2, ivec2, ivec2)
+0:96(11): error:    ivec3 clamp(ivec3, ivec3, ivec3)
+0:96(11): error:    ivec4 clamp(ivec4, ivec4, ivec4)
+0:96(11): error:    uint clamp(uint, uint, uint)
+0:96(11): error:    uvec2 clamp(uvec2, uint, uint)
+0:96(11): error:    uvec3 clamp(uvec3, uint, uint)
+0:96(11): error:    uvec4 clamp(uvec4, uint, uint)
+0:96(11): error:    uvec2 clamp(uvec2, uvec2, uvec2)
+0:96(11): error:    uvec3 clamp(uvec3, uvec3, uvec3)
+0:96(11): error:    uvec4 clamp(uvec4, uvec4, uvec4)
+
